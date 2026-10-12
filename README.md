@@ -26,11 +26,19 @@ The application helps users manage pantry ingredients, scan food images, detect 
 
 ## How to run
 
-1. Open a terminal in the workspace root.
-2. Start backend: `python -m venv backend/.venv` and `backend/.venv\Scripts\python -m pip install -r backend/requirements.txt`
-3. Start app: `backend/.venv\Scripts\python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir backend`
-4. Start frontend: `cd frontend && npm install && npm run dev -- --host 0.0.0.0`
-5. Open the frontend URL in the browser.
+Prerequisites: Python 3.12, Node.js 22.12 or newer, and Git.
+
+1. Make sure you have accepted the GitHub invitation to this private repository.
+2. Clone the project:
+
+	```powershell
+	git clone https://github.com/vannirajann/AI-leftover-food-planner.git
+	cd AI-leftover-food-planner
+	```
+
+3. Run `scripts\start.bat`. On first launch it creates the Python environment and installs the backend and frontend dependencies.
+4. Open http://localhost:5173 and sign in with the demo account below.
+5. To stop the app, run `powershell -ExecutionPolicy Bypass -File .\scripts\stop.ps1`.
 
 ## Share the live demo
 
