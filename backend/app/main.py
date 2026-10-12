@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta
+from pathlib import Path
 from typing import Any
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
@@ -479,6 +481,25 @@ def usage_history(current_user: User = Depends(get_current_user), db: Session = 
 @app.get("/api/demo-user")
 def demo_user_info() -> dict[str, str]:
     return {"email": "demo@leftover.ai", "password": "Demo123!"}
+
+
+FRONTEND_STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+
+@app.get("/{full_path:path}", include_in_schema=False)
+def serve_frontend(full_path: str) -> FileResponse:
+    if full_path == "api" or full_path.startswith("api/"):
+        raise HTTPException(status_code=404, detail="Not found")
+
+    static_root = FRONTEND_STATIC_DIR.resolve()
+    requested_file = (static_root / full_path).resolve()
+    if static_root in requested_file.parents and requested_file.is_file():
+        return FileResponse(requested_file)
+
+    index_file = static_root / "index.html"
+    if index_file.is_file():
+        return FileResponse(index_file)
+    raise HTTPException(status_code=404, detail="Frontend build is not available")
 
 
 if __name__ == "__main__":

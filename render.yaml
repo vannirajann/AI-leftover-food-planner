@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ai-leftover-food-planner-demo
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true

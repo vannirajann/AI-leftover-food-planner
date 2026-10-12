@@ -32,6 +32,10 @@ The application helps users manage pantry ingredients, scan food images, detect 
 4. Start frontend: `cd frontend && npm install && npm run dev -- --host 0.0.0.0`
 5. Open the frontend URL in the browser.
 
+## Share the live demo
+
+To let friends open the website without access to this private repository, deploy the public demo using the [deployment guide](docs/deployment.md).
+
 ## Notes
 
 - TensorFlow-based food recognition is included as an optional pipeline, but the app falls back to a safe confirmation flow when a local compatible model is not available.

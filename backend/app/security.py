@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -10,7 +11,7 @@ from sqlalchemy.orm import Session
 from .database import SessionLocal
 from .models import User
 
-SECRET_KEY = "leftover-demo-secret-key-change-in-production"
+SECRET_KEY = os.getenv("SECRET_KEY", "leftover-local-demo-key")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7
 
